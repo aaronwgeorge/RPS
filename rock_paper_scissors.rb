@@ -1,56 +1,46 @@
 puts "Let's play Rock Paper Scissors!"
 
+OPTIONS = {"R" => "Rock", "P" => "Paper", "S" => "Scissors"}
+
 #create game loop so user can play again if desired
 
 loop do
   
   #ask user to choose either r/p/s
 
-  puts "Choose One: (R/P/S)"
-
-  user_choice = gets.chomp
+  begin puts "Choose One: (R/P/S)"
+    user_choice = gets.chomp.upcase
+  end until OPTIONS.keys.include?(user_choice)
 
   #generate a computer choice randomly and tell user both choices
 
-  options = ["R", "P", "S"]
+  comp_choice = OPTIONS.values.sample
 
-  comp_choice = options.sample
-
-  def convert_choice_to_word(choice)
-    if choice.upcase == "P"
-      choice = "Paper"
-    elsif choice.upcase == "R"
-      choice = "Rock"
-    elsif choice.upcase == "S"
-      choice = "Scissors"
-    end
-  end
-
-  puts "You picked #{convert_choice_to_word(user_choice)} and the computer picked #{convert_choice_to_word(comp_choice)}..."
+  puts "You picked #{OPTIONS[user_choice]} and the computer picked #{comp_choice}..."
 
   #3 conditions - you win, comp wins, or tie
 
-  case user_choice.upcase
+  case user_choice
   when "P"
-    if comp_choice.upcase == "R"
+    if comp_choice == "Rock"
       puts "Paper covers rock. You win!"
-    elsif comp_choice.upcase == "S"
+    elsif comp_choice == "Scissors"
       puts "Scissors cuts paper. You lose!"
     else
       puts "It's a tie!"
     end
   when "R"
-    if comp_choice.upcase == "P"
+    if comp_choice == "Paper"
       puts "Paper covers rock. You lose!"
-    elsif comp_choice.upcase == "S"
+    elsif comp_choice == "Scissors"
       puts "Rock smashes scissors. You win!"
     else
       puts "It's a tie!"
     end
   when "S"
-    if comp_choice.upcase == "R"
+    if comp_choice == "Rock"
       puts "Rock smashes scissors. You lose!"
-    elsif comp_choice.upcase == "P"
+    elsif comp_choice == "Paper"
       puts "Scissors cuts paper. You win!"
     else
       puts "It's a tie!"
